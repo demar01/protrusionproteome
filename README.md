@@ -1,12 +1,10 @@
 # Protrusionproteome <img src="man/figures/protrusionproteome_hex.png" align="right" height="150"/>
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/demar01/protrusionproteome/workflows/R-CMD-check/badge.svg)](https://github.com/demar01/protrusionproteome/actions)
 [![codecov](https://codecov.io/gh/demar01/protrusionproteome/branch/master/graph/badge.svg?token=ij1MeWsszd)](https://codecov.io/gh/demar01/protrusionproteome)
 [![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
-
-
-
- <!-- badges: end -->
+<!-- badges: end -->
   
 `protrusionproteome` is a package that contains a number of functions to  perform basic
 analysis of TMT-labelled samples (cell bodies and protrusions) for proteomic experiments
@@ -34,7 +32,7 @@ Mass-spectrometry derived TMT-datasets available in `protrusionproteome` are:
 |:---	|:---	|
 |  prot.raw 	|  TMT quantitative __proteomics__ analysis of protrusions and cells bodies of MDA-MB231 cells collected after 0.5, 1, 2, 4, & 8 hrs post protrusion induction (proteinGroups.txt) 	|
 |  peptides.raw	|  TMT quantitative __peptide__ analysis of protrusions and cells bodies of MDA-MB231 cells collected after 0.5, 1, 2, 4, & 8 hrs post protrusion induction (peptides.txt)
-|  evidence.raw	| __Information__ about the identified peptides for TMT quantitative peptide analysis of protrusions and cells bodies of MDA-MB231 cells collected after 0.5, 1, 2, 4, & 8 hrs post protrusion induction (peptides.txt)	|
+|  evidence.raw	| __Information__ about the identified peptides for TMT quantitative peptide analysis of protrusions and cells bodies of MDA-MB231 cells collected after 0.5, 1, 2, 4, & 8 hrs post protrusion induction (evidence.txt)	|
 
 
 ### Additional information 
