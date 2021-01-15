@@ -1,0 +1,22 @@
+citHeader("To cite protrusionproteome in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Subcellular mRNA Localization Regulates Ribosome
+Biogenesis in Migrating Cells",
+  author       = personList(as.person("Maria Dermit"),
+                   as.person("Martin Dodel"),
+                    as.person("Flora C.Y. Lee"),
+                     as.person("Muhammad S. Azman"),
+                      as.person("Hagen Schwenzer"),
+                       as.person("J. Louise Jones"),
+                        as.person("Sarah P. Blagden"),
+                         as.person("Jernej Ule"),
+                          as.person("Faraz K. Mardakheh")),
+         journal = "Developmental Cell",
+         year = "2020",
+         volume = "55",
+         pages = "298-313",
+         textVersion = paste("Maria Dermit, MartinDodel, Flora C.Y.Lee, Muhammad S.Azman, HagenSchwenzer, J. LouiseJones, Sarah P.Blagden, Jernej Ule, Faraz K.Mardakheh.",
+           "Subcellular mRNA Localization Regulates Ribosome
+Biogenesis in Migrating Cells.",
+           "Developmental Cells (2020)."))
