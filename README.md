@@ -1,7 +1,11 @@
 # Protrusionproteome <img src="man/figures/protrusionproteome_hex.png" align="right" height="150"/>
 
 <!-- badges: start -->
+[![codecov](https://codecov.io/gh/demar01/protrusionproteome/branch/master/graph/badge.svg?token=ij1MeWsszd)](https://codecov.io/gh/demar01/protrusionproteome)
 [![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+
+
  <!-- badges: end -->
   
 `protrusionproteome` is a package that contains a number of functions to  perform basic
