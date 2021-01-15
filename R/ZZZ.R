@@ -9,7 +9,7 @@
         "ratios","proteins","names","ids","delim",
         "time_unit","time_span", "intensities",
         "color_highlight","xpos","ypos","xlimit","ylimit", "category",
-        "installed.packages","dbs"
+        "installed.packages","dbs", "Type","g","freq","Missed.cleavages"
       )
     )
   invisible()
