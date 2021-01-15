@@ -10,7 +10,6 @@ The dataset contains the proteinGroup.txt output file from
 \format{
 A dataframe with 5905 rows and 107 variables.
 The important variables are as follows:
-
 \itemize{
   \item{Sequence}{The identified AA sequence of the peptide.}
   \item{Length}{The length of the sequence stored in the column 'Sequence'.}
@@ -19,7 +18,6 @@ The important variables are as follows:
   \item{Raw.file}{The name of the RAW-file the mass spectral data was derived from.}
   \item{Score}{Andromeda score for the best associated MS/MS spectrum.}
 }
-#' @return A data.frame
 }
 \source{
 Dermit et al 2020.
@@ -29,6 +27,9 @@ Developmental Cell Volume 55, Issue 3, 9 November 2020, Pages 298-313.e10.
 }
 \usage{
 evidence.raw
+}
+\value{
+A data.frame
 }
 \description{
 evidence file from MaxQuant of a TMT experiment of MDA-MB231 cell

@@ -19,9 +19,9 @@ The important variables are as follows:
   \item{Protein.names}{Full protein names}
   \item{Gene.names}{Gene name}
   \item{Fasta.headers}{Header as present in the Uniprot fasta file}
-  \item{Only.identified.by.site}{The protein is only identified by a modification site if marked ('+').}
-  \item{Reverse}{The protein is identified in the decoy database if marked ('+')}
-  \item{Potential.contaminant}{The protein is a known contaminant if marked ('+')}
+  \item{Only.identified.by.site}{The protein is only identified by a modification site if marked +.}
+  \item{Reverse}{The protein is identified in the decoy database if marked +}
+  \item{Potential.contaminant}{The protein is a known contaminant if marked +}
 }
 }
 \source{

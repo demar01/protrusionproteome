@@ -1,2 +1,5 @@
 .DS_Store
 .Rproj.user
+protrusionproteome.Rcheck/
+protrusionproteome*.tar.gz
+protrusionproteome*.tgz
