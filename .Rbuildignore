@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^protrusionproteome\.Rcheck$
+^protrusionproteome.*\.tar\.gz$
+^protrusionproteome.*\.tgz$
