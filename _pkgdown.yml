@@ -15,6 +15,7 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+
 reference:
 - title: All functions
   contents:
