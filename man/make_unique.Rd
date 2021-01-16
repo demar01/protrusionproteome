@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_unique.R
 \name{make_unique}
 \alias{make_unique}
-\title{Make unique names}
+\title{Make unique name identifiers for proteins}
 \usage{
 make_unique(proteins, names, ids, delim = ";")
 }

@@ -23,14 +23,12 @@ suppressPackageStartupMessages({
   library(tidyverse)
 })
 ```
-
-
 \pagebreak
 
 # Abstract
 
 `protrusionproteome` is a package that provides an analytical workflow of
-shotgunmass spectrometry-based proteomics experiments with tandem mass tag (TMT) 
+shotgun mass spectrometry-based proteomics experiments with tandem mass tag (TMT) 
 labelingof protrusion profiling experiments [@Dermit2020]. Protrusion are
 purified from microporous transwell filters and their proteomes are compare to
 the cell bodies.
@@ -55,25 +53,29 @@ library(protrusionproteome)
 library(dplyr)
 library(SummarizedExperiment)
 library(lubridate)
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
+)
 
 ```
 
 
-# Getting the data 
+# Data loading, QC and processing 
 We analyze the time-course protrusion profiles proteome dataset from 
-[@Dermit2020] (PRIDE PXD021239).
-
+[@Dermit2020] (PRIDE PXD021239), which is provided within this package. 
 The raw mass spectrometry data were first analyzed using MaxQuant [@Cox2014]. We 
-initially perform a number of data cuality checks including trypsin efficiency and 
-TMT labeling incorporation. 
+initially perform a number of data quality checks including trypsin efficiency
+and TMT labeling incorporation. 
 
-## QC: Calculating protease efficiency 
+## Calculating protease efficiency 
 
 Tryspsin was the protease used to produce tryptic peptides for this dataset.
 Note that the maximum missed cleavages allowed on the MaxQuant search was 2. 
 The numbers of trypsin miscleavages can be used as a proxy of trypsin 
-efficiency. This information is contained in the "peptides.txt" file, and is
-provided with this package:
+efficiency. This information is contained in the __peptides.txt__ file, and it
+is provided with this package:
 
 ```{r load-data-peptides}
 # Peptides data is provided with the package
@@ -81,15 +83,15 @@ data("peptides.raw")
 pepdata <- peptides.raw
 ```
 
-To visualize trypsin efficiency, the plot_miscleavagerate function can be used.
+To visualize trypsin efficiency, the `plot_miscleavagerate` function can be used.
 ```{r plot-miscleavages}
 # Stacked barplot of trypsin miscleavages
 plot_miscleavagerate(pepdata)
 ```
 
-## QC: Calculating TMT labeling efficiency 
+## Calculating TMT labeling efficiency 
 
-TMT label efficiency can be measured as a proxy of peptides modified by TMT. This information is contained in the "evidence.txt" file, and is
+TMT label efficiency can be measured as a proxy of peptides modified by TMT. This information is contained in the __evidence.txt__ file, and is
 provided with this package:
 
 ```{r load-data-evidence}
@@ -98,15 +100,15 @@ data("evidence.raw")
 evidencedata <- evidence.raw
 ```
 
-To visualize TMT label efficiency, the plot_labelingefficiency function can be used.
+To visualize TMT label efficiency, we can use `plot_labelingefficiency` function.
 ```{r plot-labelingefficiency}
  plot_labelingefficiency(evidencedata)
 ```
 
-## Getting aggregated protein data
+## Loading protein data.
 
 Protein intensities are obtained from aggregated peptides over protein groups. This
-information is contained in the “proteinGroups.txt” file, is provided with this
+information is contained in the __proteinGroups.txt__ file, is provided with this
 package and is used as input for the downstream analysis.
 
 ```{r load-data}
@@ -122,14 +124,13 @@ dim(data)
 
 ## Filtering the data
 
-We filter for decoy database hits, contaminant proteins and  hits only identified by site, which are indicated by "+" in the columns "Reverse","Potential.contaminants" and "Only.identified.by.site", respectively.
+We filter for decoy database hits, contaminant proteins and  hits only identified by site, which are indicated by "+" in the columns "Reverse","Potential.contaminants" and "Only.identified.by.site", respectively using `filter_MaxQuant` function.
 
 ```{r proteins-filtered}
 proteins_filtered <- filter_MaxQuant(data,
     tofilter= c("Reverse" , "Potential.contaminant" ,"Only.identified.by.site"))
 ```
-
-
+We can see that the filtered data has following dimensions:
 ```{r dim-proteins-filtered}
 dim(proteins_filtered)
 ```
@@ -140,7 +141,7 @@ Uniprot names are protein unique identifiers but are not immediately informative
 The associated Gene names are informative, however these are not always unique (i.e Gene.names
 is not primary key to the proteins_filtered table).
 
-```{r cheking-duplicated-Gene-names}
+```{r cheking-duplicated-Gene-names,  message=FALSE}
 # Are Gene.names primary key to this table?
 proteins_filtered %>% group_by(Gene.names) %>% summarize(count= n()) %>% 
   arrange(desc( count)) %>% filter( count > 1)
@@ -156,7 +157,12 @@ We can check that name variable uniquely identifies proteins.
 data_unique %>% group_by(name) %>% tally() %>% filter(n > 1) %>% nrow()
 ```
 
-# Understanding which columns will be used in the SummarizedExperiment object
+# SummarizedExperiment proteomics
+
+## Experimental design
+
+The columns that will be used in the summarised experiment are __Reporter.intensity.corrected__ columns. Below is the table of how the samples 
+were labeled in this experiment. 
 
 ```{r kable-experiment, fig.cap = "Intensities and corresponding experiment"}
 columns_positions<-str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")
@@ -167,7 +173,7 @@ experiment <- str_c(minute(rep(minutes(x = time_unit) *time_span,each=2)),c("bod
 knitr::kable(tibble(intensities,experiment))
 ```
 
-## Making a SummarizedExperiment object from TMT data
+## SummarizedExperiment of TMT data
 
 SummarizedExperiment objects [@Morgan2020] are widely used across Bioconductor packages as data containers. This class of object contains the actual data (assays), information on the samples (colData) and additional feature annotation. We generate the SummarizedExperiment object from our data extracting information directly from the column names of rectangular data using the `make_TMT_se` function. The actual assay data is log2-transformed of median-subtracted Prot/Cell-bodies for each condition.
 
@@ -176,10 +182,13 @@ SummarizedExperiment objects [@Morgan2020] are widely used across Bioconductor p
 columns_positions<-str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")
 se <- make_TMT_se(data_unique,columns_positions,intensities,time_unit=30,
 time_span=c(1,2,4,8,16), numerator= "prot", denominator= "body", sep = "_")
+```
 
-# Let's have a look at the SummarizedExperiment object
+Let's have a look at the SummarizedExperiment object
+```{r explore-se}
 se
 ```
+
 As we see the number of columns has been reduced to half (from 10 column sample data to 
 5 column sample data containing log2 Prot/Cell-bodies ratios)
 
