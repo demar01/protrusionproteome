@@ -12,7 +12,7 @@ published by [Dermit et al 2020](https://www.sciencedirect.com/science/article/p
 Protein, peptide and evidence data output of [MaxQuant](http://www.nature.com/nbt/journal/v26/n12/full/nbt.1511.html) is 
 contained within the package. Data is handled as SummarizedExperiment object and
 functions for filtering, log2 transformations, calculating TMT ratios and median 
-substation are included. Vizualization tools for QC checks of protrusion purification efficiency, protease efficiency and TMT incorporation are provided. It is also 
+subtraction are included. Vizualization tools for QC checks of protrusion purification efficiency, protease efficiency and TMT incorporation are provided. It is also 
 includes tools for statistical testing of significantly enriched protein 
 categories in cell protrusions.
 
