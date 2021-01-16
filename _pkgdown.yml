@@ -14,12 +14,7 @@ navbar:
       href: index.html
     reference:
       text: Reference
-    articles:
-      text: Articles
-      menu:
-      - text: Introduction to protrusions proteome analysis
-        href: articles/index.html
-
+      href: reference/index.html
 reference:
 - title: All functions
   contents:
