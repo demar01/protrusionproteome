@@ -1,0 +1,212 @@
+---
+title: "Introduction to protrusions proteome analysis"
+description: >
+  Step-by-step of proteomic analysis of cell bodies and protrusions.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to protrusions proteome analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r required packages, echo = FALSE, warning=FALSE, results="hide"}
+suppressPackageStartupMessages({
+  library("BiocStyle")
+  library("protrusionproteome")
+  library(knitr)
+  library(dplyr)
+  library(lubridate)
+  library(tidyverse)
+})
+```
+
+
+\pagebreak
+
+# Abstract
+
+`protrusionproteome` is a package that provides an analytical workflow of
+shotgunmass spectrometry-based proteomics experiments with tandem mass tag (TMT) 
+labelingof protrusion profiling experiments [@Dermit2020]. Protrusion are
+purified from microporous transwell filters and their proteomes are compare to
+the cell bodies.
+
+protrusionproteome requires tabular input e.g. proteinGroups.txt, peptides.txt and evidence.txt output of quantitative analysis software like MaxQuant. Functions are provided for preparation, filtering as well as log transformation,calculating TMT ratios and median substation as well as generating SummarizedExperiment objects. It also includes tools to visualize protrusion purification efficiency, protease miscleavages and TMT incorporation efficiency with visualization such as scatterplot and barplot representations. Finally, it includes statistical testing of significantly enrich categories in cell protrusions. 
+
+# Installation and loading package
+
+Start R and install the RBP package:
+```{r install, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("protrusionproteome")
+library("protrusionproteome")
+```
+
+Once you have the package installed, load `protrusionproteome` and dplyr for 
+data transformation into R. 
+
+```{r setup, message=FALSE}
+library(protrusionproteome)
+library(dplyr)
+library(SummarizedExperiment)
+library(lubridate)
+
+```
+
+
+# Getting the data 
+We analyze the time-course protrusion profiles proteome dataset from 
+[@Dermit2020] (PRIDE PXD021239).
+
+The raw mass spectrometry data were first analyzed using MaxQuant [@Cox2014]. We 
+initially perform a number of data cuality checks including trypsin efficiency and 
+TMT labeling incorporation. 
+
+## QC: Calculating protease efficiency 
+
+Tryspsin was the protease used to produce tryptic peptides for this dataset.
+Note that the maximum missed cleavages allowed on the MaxQuant search was 2. 
+The numbers of trypsin miscleavages can be used as a proxy of trypsin 
+efficiency. This information is contained in the "peptides.txt" file, and is
+provided with this package:
+
+```{r load-data-peptides}
+# Peptides data is provided with the package
+data("peptides.raw")
+pepdata <- peptides.raw
+```
+
+To visualize trypsin efficiency, the plot_miscleavagerate function can be used.
+```{r plot-miscleavages}
+# Stacked barplot of trypsin miscleavages
+plot_miscleavagerate(pepdata)
+```
+
+## QC: Calculating TMT labeling efficiency 
+
+TMT label efficiency can be measured as a proxy of peptides modified by TMT. This information is contained in the "evidence.txt" file, and is
+provided with this package:
+
+```{r load-data-evidence}
+#Evidence data is provided with the package
+data("evidence.raw")
+evidencedata <- evidence.raw
+```
+
+To visualize TMT label efficiency, the plot_labelingefficiency function can be used.
+```{r plot-labelingefficiency}
+ plot_labelingefficiency(evidencedata)
+```
+
+## Getting aggregated protein data
+
+Protein intensities are obtained from aggregated peptides over protein groups. This
+information is contained in the “proteinGroups.txt” file, is provided with this
+package and is used as input for the downstream analysis.
+
+```{r load-data}
+# The data is provided with the package
+data("prot.raw")
+data <- prot.raw
+```
+
+This dataset has the following dimensions:
+```{r dim-data}
+dim(data)
+```
+
+## Filtering the data
+
+We filter for decoy database hits, contaminant proteins and  hits only identified by site, which are indicated by "+" in the columns "Reverse","Potential.contaminants" and "Only.identified.by.site", respectively.
+
+```{r proteins-filtered}
+proteins_filtered <- filter_MaxQuant(data,
+    tofilter= c("Reverse" , "Potential.contaminant" ,"Only.identified.by.site"))
+```
+
+
+```{r dim-proteins-filtered}
+dim(proteins_filtered)
+```
+
+
+## Making unique identifiers
+Uniprot names are protein unique identifiers but are not immediately informative.
+The associated Gene names are informative, however these are not always unique (i.e Gene.names
+is not primary key to the proteins_filtered table).
+
+```{r cheking-duplicated-Gene-names}
+# Are Gene.names primary key to this table?
+proteins_filtered %>% group_by(Gene.names) %>% summarize(count= n()) %>% 
+  arrange(desc( count)) %>% filter( count > 1)
+```
+
+Even more critical, some proteins do not have an annotated Gene name. Similarly to [@Arne2018] approach, for those proteins missing a Gene name identifier we will use the Uniprot ID. 
+
+``` {r make-unique}
+data_unique <- make_unique(proteins_filtered, "Gene.names", "Protein.IDs", delim = ";")
+```
+We can check that name variable uniquely identifies proteins.
+``` {r data-unique-cheking-duplicated-Gene-names}
+data_unique %>% group_by(name) %>% tally() %>% filter(n > 1) %>% nrow()
+```
+
+# Understanding which columns will be used in the SummarizedExperiment object
+
+```{r kable-experiment, fig.cap = "Intensities and corresponding experiment"}
+columns_positions<-str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")
+intensities <- colnames(data_unique)[str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")]
+time_unit=30
+time_span=c(1,2,4,8,16)
+experiment <- str_c(minute(rep(minutes(x = time_unit) *time_span,each=2)),c("body","prot"),sep="_")
+knitr::kable(tibble(intensities,experiment))
+```
+
+## Making a SummarizedExperiment object from TMT data
+
+SummarizedExperiment objects [@Morgan2020] are widely used across Bioconductor packages as data containers. This class of object contains the actual data (assays), information on the samples (colData) and additional feature annotation. We generate the SummarizedExperiment object from our data extracting information directly from the column names of rectangular data using the `make_TMT_se` function. The actual assay data is log2-transformed of median-subtracted Prot/Cell-bodies for each condition.
+
+``` {r create-TMT-se, warning=FALSE, message=FALSE}
+# Generate a SummarizedExperiment object using using file information and user input
+columns_positions<-str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")
+se <- make_TMT_se(data_unique,columns_positions,intensities,time_unit=30,
+time_span=c(1,2,4,8,16), numerator= "prot", denominator= "body", sep = "_")
+
+# Let's have a look at the SummarizedExperiment object
+se
+```
+As we see the number of columns has been reduced to half (from 10 column sample data to 
+5 column sample data containing log2 Prot/Cell-bodies ratios)
+
+## Exploring the description of each sample in the SummarizedExperiment object 
+```{r colData}
+SummarizedExperiment::colData(se)
+```
+
+# Vizualing the results
+We can visualise the Prot/Cell-bodies distribution across timepoints.
+```{r plot-scatter,  warning=FALSE}
+plot_scatter(se, 1, 2, "HIST", 'orange', 4, 4)
+```
+As we see Histone proteins are depleted from body. 
+
+# 1D enrichment analysis 
+
+We can perform an protein enrichment analysis for a given timepoint
+```{r enrichment-tibble,  warning=FALSE ,eval = FALSE}
+enrichment_table <- enrich_1D(se,timepoint= 5,
+                               dbs = "GO_Molecular_Function_2018",
+                              number_dbs=1)
+
+```
+
+# Session information
+
+``` {r session_info, echo = FALSE}
+sessionInfo()
+```
+
+# References {-}
+
+
