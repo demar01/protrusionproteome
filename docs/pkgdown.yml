@@ -2,7 +2,6 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  pkgdowm: pkgdowm.html
   protrusionproteome: protrusionproteome.html
-last_built: 2021-01-15T21:10Z
+last_built: 2021-01-16T11:42Z
 

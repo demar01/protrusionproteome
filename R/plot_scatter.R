@@ -1,4 +1,7 @@
-#' plot_scatter
+#' Plot log2 protrusion/cell-bodies distribution across two biological conditions
+#'
+#' \code{plot_scatter} generates a scatterplot for two conditions of interest
+#' highlighting a given category of interest.
 #'
 #' @param se SummarizedExperiment,
 #' Data object containing processed proteomics data

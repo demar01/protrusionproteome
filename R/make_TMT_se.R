@@ -1,6 +1,9 @@
-#' make_TMT_se
 #' Data.frame to SummarizedExperiment object
 #' conversion using file information and user input
+#'
+#' \code{make_TMT_se} creates a SummarizedExperiment object
+#' based on protein table and user's input about experimental design.
+#'
 #' @param proteins_unique Data.frame,
 #' Protein table with unique names annotated in the 'name' column
 #' (output from \code{\link{make_unique}()}).

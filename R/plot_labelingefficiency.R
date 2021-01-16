@@ -1,4 +1,8 @@
-#' plot_labelingefficiency
+#' Plot TMT labeling efficiency
+#'
+#' \code{plot_labelingefficiency} generates a stacked barplot for peptides
+#' modified by TMT at the N-termini and Lys residues.
+#'
 #' @param evidence Data.frame,
 #' evidence table originating from MaxQuant.
 #' @examples

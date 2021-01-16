@@ -54,7 +54,7 @@
 #' evidence file from MaxQuant of a TMT experiment of MDA-MB231 cell
 #' protrusions and bodies during a timecourse experiment.
 #'
-#' The dataset contains the peptides.txt  output file from
+#' The dataset contains the evidence.txt  output file from
 #' \href{http://www.maxquant.org}{MaxQuant}.
 #'
 #' @format A data.frame with 170661 observations and 15 variables:

@@ -1,4 +1,6 @@
-#' enrich_1D
+#' 1D enrichment analysis calculated with enrichR
+#'
+#' \code{enrich_1D} tests for deferentially enriched proteins (1D enrichment).
 #'
 #' @param se SummarizedExperiment,
 #' Data object containing processed proteomics data

@@ -1,4 +1,4 @@
-#' Make unique names
+#' Make unique name identifiers for proteins
 #'
 #' \code{make_unique} generates unique identifiers
 #' for a proteomics dataset based on "name" and "id" columns.

@@ -26,7 +26,7 @@ evidence.raw
 A data.frame.
 }
 \description{
-The dataset contains the peptides.txt  output file from
+The dataset contains the evidence.txt  output file from
 \href{http://www.maxquant.org}{MaxQuant}.
 }
 \keyword{datasets}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_MaxQuant.R
 \name{filter_MaxQuant}
 \alias{filter_MaxQuant}
-\title{filter_MaxQuant}
+\title{Filter proteinGroups table by rows}
 \usage{
 filter_MaxQuant(proteins, tofilter)
 }
@@ -17,7 +17,8 @@ Name of the column(s) containing features to be filtered on.}
 dataframe
 }
 \description{
-filter_MaxQuant
+\code{filter_MaxQuant} imports a proteinGroups table from MaxQuant
+and filter rows with a '+' on columns to filter provided by user.
 }
 \examples{
 if(interactive()){

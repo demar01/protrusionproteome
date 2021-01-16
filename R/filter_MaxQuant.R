@@ -1,4 +1,8 @@
-#' filter_MaxQuant
+#' Filter proteinGroups table by rows
+#'
+#' \code{filter_MaxQuant} imports a proteinGroups table from MaxQuant
+#' and filter rows with a '+' on columns to filter provided by user.
+#'
 #' @param proteins Data.frame,
 #' Protein table originating from MaxQuant.
 #' @param tofilter Character,

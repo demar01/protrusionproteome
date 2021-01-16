@@ -2,7 +2,7 @@
 % Please edit documentation in R/enrich_1D.R
 \name{enrich_1D}
 \alias{enrich_1D}
-\title{enrich_1D}
+\title{1D enrichment analysis calculated with enrichR}
 \usage{
 enrich_1D(
   se,
@@ -28,7 +28,7 @@ A tibble
 with enrichment terms, p-values etc
 }
 \description{
-enrich_1D
+\code{enrich_1D} tests for deferentially enriched proteins (1D enrichment).
 }
 \examples{
 if(interactive()){

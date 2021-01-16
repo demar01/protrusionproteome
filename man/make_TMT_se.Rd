@@ -2,8 +2,7 @@
 % Please edit documentation in R/make_TMT_se.R
 \name{make_TMT_se}
 \alias{make_TMT_se}
-\title{make_TMT_se
-Data.frame to SummarizedExperiment object
+\title{Data.frame to SummarizedExperiment object
 conversion using file information and user input}
 \usage{
 make_TMT_se(
@@ -49,9 +48,8 @@ with log2-transformed values, normalised to control and median subtracted
 (by column).
 }
 \description{
-make_TMT_se
-Data.frame to SummarizedExperiment object
-conversion using file information and user input
+\code{make_TMT_se} creates a SummarizedExperiment object
+based on protein table and user's input about experimental design.
 }
 \examples{
 if(interactive()){
