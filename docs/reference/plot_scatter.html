@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • protrusionproteome</title>
+<title>Plot log2 protrusion/cell-bodies distribution across two biological conditions — plot_scatter • protrusionproteome</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Plot log2 protrusion/cell-bodies distribution across two biological conditions — plot_scatter" />
+<meta property="og:description" content="plot_scatter generates a scatterplot for two conditions of interest
+highlighting a given category of interest." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,100 +114,70 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Plot log2 protrusion/cell-bodies distribution across two biological conditions</h1>
+    
+    <div class="hidden name"><code>plot_scatter.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>plot_scatter</code> generates a scatterplot for two conditions of interest
+highlighting a given category of interest.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>plot_scatter</span><span class='op'>(</span><span class='va'>se</span>, <span class='va'>xpos</span>, <span class='va'>ypos</span>, <span class='va'>category</span>, <span class='va'>color_highlight</span>, <span class='va'>xlimit</span>, <span class='va'>ylimit</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="enrich_1D.html">enrich_1D()</a></code> </p>
-        </td>
-        <td><p>1D enrichment analysis calculated with enrichR</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="evidence.raw.html">evidence.raw</a></code> </p>
-        </td>
-        <td><p>evidence file from MaxQuant of a TMT experiment of MDA-MB231 cell
-protrusions and bodies during a timecourse experiment.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="filter_MaxQuant.html">filter_MaxQuant()</a></code> </p>
-        </td>
-        <td><p>Filter proteinGroups table by rows</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_TMT_se.html">make_TMT_se()</a></code> </p>
-        </td>
-        <td><p>Data.frame to SummarizedExperiment object
-conversion using file information and user input</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_unique.html">make_unique()</a></code> </p>
-        </td>
-        <td><p>Make unique name identifiers for proteins</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="peptides.raw.html">peptides.raw</a></code> </p>
-        </td>
-        <td><p>peptides file from MaxQuant of a TMT experiment of MDA-MB231 cell
-protrusions and bodies during a timecourse experiment.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_labelingefficiency.html">plot_labelingefficiency()</a></code> </p>
-        </td>
-        <td><p>Plot TMT labeling efficiency</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_miscleavagerate.html">plot_miscleavagerate()</a></code> </p>
-        </td>
-        <td><p>Plot protease misscleavage rate</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_scatter.html">plot_scatter()</a></code> </p>
-        </td>
-        <td><p>Plot log2 protrusion/cell-bodies distribution across two biological conditions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prot.raw.html">prot.raw</a></code> </p>
-        </td>
-        <td><p>proteinGroups file from MaxQuant of a TMT experiment of MDA-MB231 cell
-protrusions and bodies during a timecourse experiment.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>se</th>
+      <td><p>SummarizedExperiment,
+Data object containing processed proteomics data</p></td>
+    </tr>
+    <tr>
+      <th>xpos</th>
+      <td><p>Integer,
+Timepoint to represent on the x axis on the scatterplot</p></td>
+    </tr>
+    <tr>
+      <th>ypos</th>
+      <td><p>Integer,
+Timepoint to represent on the y axis on the scatterplot</p></td>
+    </tr>
+    <tr>
+      <th>category</th>
+      <td><p>Character,
+Sets the proteins to highlight in the plot</p></td>
+    </tr>
+    <tr>
+      <th>color_highlight</th>
+      <td><p>Character,
+Sets the color of category to highlight in the plot</p></td>
+    </tr>
+    <tr>
+      <th>xlimit</th>
+      <td><p>Character,
+Sets the limit of x axis on the scatterplot</p></td>
+    </tr>
+    <tr>
+      <th>ylimit</th>
+      <td><p>Character,
+Sets the limit of y axis on the scatterplot</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A scatter plot (generated by <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></code>)</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+<span class='fu'>plot_scatter</span><span class='op'>(</span><span class='va'>se</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='st'>"HIST"</span>, <span class='st'>'orange'</span>, <span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
