@@ -1,1 +1,40 @@
-destination: docs
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    intro:
+      text: Get started
+      href: articles/protrusionproteome.html
+    articles:
+      text: Articles
+      menu:
+      - text: Introduction to protrusions proteome analysis
+        href: articles/protrusionproteome2.html
+
+reference:
+- title: All functions
+  contents:
+  - '`enrich_1D`'
+  - '`evidence.raw`'
+  - '`filter_MaxQuant`'
+  - '`make_TMT_se`'
+  - '`make_unique`'
+  - '`peptides.raw`'
+  - '`plot_labelingefficiency`'
+  - '`plot_miscleavagerate`'
+  - '`plot_scatter`'
+  - '`prot.raw`'
+
