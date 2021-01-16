@@ -22,7 +22,7 @@ navbar:
       text: Articles
       menu:
       - text: Introduction to protrusions proteome analysis
-        href: articles/protrusionproteome2.html
+        href: vignettes/protrusionproteome2.Rmd
 
 reference:
 - title: All functions
