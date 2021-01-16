@@ -19,7 +19,7 @@ navbar:
       text: Articles
       menu:
       - text: Introduction to protrusions proteome analysis
-        href: articles/protrusionproteome_BC.html
+        href: articles/protrusionproteome.html
 
 reference:
 - title: All functions
