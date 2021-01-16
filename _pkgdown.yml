@@ -15,11 +15,14 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+<<<<<<< HEAD
     articles:
       text: Articles
       menu:
       - text: Introduction to protrusions proteome analysis
         href: articles/protrusionproteome.html
+=======
+>>>>>>> parent of d4113ec... adding website
 
 reference:
 - title: All functions
