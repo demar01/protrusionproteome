@@ -4,40 +4,29 @@
 \name{evidence.raw}
 \alias{evidence.raw}
 \title{evidence file from MaxQuant of a TMT experiment of MDA-MB231 cell
-protrusions and bodies during a timecourse experiment.
-The dataset contains the proteinGroup.txt output file from
-\href{http://www.maxquant.org}{MaxQuant}.}
+protrusions and bodies during a timecourse experiment.}
 \format{
-A dataframe with 5905 rows and 107 variables.
-The important variables are as follows:
-\itemize{
-  \item{Sequence}{The identified AA sequence of the peptide.}
-  \item{Length}{The length of the sequence stored in the column 'Sequence'.}
-  \item{Modifications}{Post-translational modifications contained within the
-  identified peptide sequence.}
-  \item{Raw.file}{The name of the RAW-file the mass spectral data was derived from.}
-  \item{Score}{Andromeda score for the best associated MS/MS spectrum.}
+A data.frame with 170661 observations and 15 variables:
+\describe{
+  \item{Sequence}{The identified AA sequence of the peptide}
+  \item{Length}{The length of the sequence stored in the column Sequence}
+  \item{Modifications}{Post-translational modifications contained within the identified peptide sequence}
 }
 }
 \source{
 Dermit et al 2020.
-Subcellular mRNA Localization Regulates Ribosome Biogenesis in Migrating Cells
+Subcellular mRNA Localization Regulates Ribosome Biogenesis in Migrating Cells.
 Developmental Cell Volume 55, Issue 3, 9 November 2020, Pages 298-313.e10.
-\href{https://www.cell.com/developmental-cell/pdfExtended/S1534-5807(20)30796-6}.
+\href{https://www.cell.com/developmental-cell/pdfExtended/S1534-5807(20)30796-6}{doi.org/10.1016/j.devcel.2020.10.006}.
 }
 \usage{
 evidence.raw
 }
 \value{
-A data.frame
+A data.frame.
 }
 \description{
-evidence file from MaxQuant of a TMT experiment of MDA-MB231 cell
-protrusions and bodies during a timecourse experiment.
-The dataset contains the proteinGroup.txt output file from
+The dataset contains the peptides.txt  output file from
 \href{http://www.maxquant.org}{MaxQuant}.
-}
-\examples{
-head(evidence.raw)
 }
 \keyword{datasets}
