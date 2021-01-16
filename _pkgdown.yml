@@ -14,15 +14,11 @@ navbar:
       href: index.html
     reference:
       text: Reference
-      href: reference/index.html
-    intro:
-      text: Get started
-      href: articles/protrusionproteome.html
     articles:
       text: Articles
       menu:
       - text: Introduction to protrusions proteome analysis
-        href: vignettes/protrusionproteome2.Rmd
+        href: articles/index.html
 
 reference:
 - title: All functions
