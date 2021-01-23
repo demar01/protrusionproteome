@@ -11,13 +11,12 @@ se0 <- SummarizedExperiment(assays=SimpleList(counts=counts),
 dbs = "GO_Molecular_Function_2018"
 
 
-
 test_that("enrich_1D throws error without valid input", {
   expect_error(enrich_1D("prot.raw",1,"GO_Molecular_Function_2018", 1))
   expect_error(enrich_1D(prot.raw,"1","GO_Molecular_Function_2018", 1))
   expect_error(enrich_1D(prot.raw,1,GO_Molecular_Function_2018, 1))
   expect_error(enrich_1D(prot.raw,1,"GO_Molecular_Function_2018", "1"))
-  })
+})
 
 libraries<-enrichR::listEnrichrDbs()$libraryName
 test_that("enrich_1D searches for annotation libraries", {
@@ -33,5 +32,3 @@ test_that("enrich_1D returns a data.frame", {
   expect_s3_class(data.frame(rownames(df),df[,1]), "data.frame")
   expect_s3_class(enrich_1D(se0,1,"GO_Molecular_Function_2018", 1), "data.frame")
 })
-
-
