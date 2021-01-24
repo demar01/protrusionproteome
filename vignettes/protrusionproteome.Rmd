@@ -48,19 +48,21 @@ library("protrusionproteome")
 Once you have the package installed, load `protrusionproteome` and dplyr for 
 data transformation into R. 
 
-```{r setup, message=FALSE}
-library(protrusionproteome)
-library(dplyr)
-library(SummarizedExperiment)
-library(lubridate)
-  knitr::opts_chunk$set(
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>",
     crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
 )
-
 ```
 
+```{r libraries}
+library(protrusionproteome)
+library(dplyr)
+library(SummarizedExperiment)
+library(lubridate)
+library(stringr)
+```
 
 # Data loading, QC and processing 
 We analyze the time-course protrusion profiles proteome dataset from 

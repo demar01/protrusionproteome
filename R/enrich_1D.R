@@ -48,7 +48,7 @@ enrich_1D <- function (se,
 
   df<-as.data.frame(assay(se))
   df<-data.frame(rownames(df),df[,timepoint])
-  enriched <- enrichr(as.character(df$rownames.df.), dbs)
+  enriched <- enrichr(df$rownames.df., dbs)
   enriched <- enriched[[number_dbs]] %>% as_tibble()
   return(enriched)
 }
