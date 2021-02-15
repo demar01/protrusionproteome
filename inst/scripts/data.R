@@ -21,6 +21,18 @@ evidencefile<- system.file(
   "evidence.txt",
   package = "protrusionproteome"
 )
+
+allpeptides<- system.file(
+  "extdata",
+  "allPeptides_identified.txt",
+  package = "protrusionproteome"
+)
+
+allpeptides.raw <- read.delim(allpeptides,stringsAsFactors = FALSE) %>%
+  janitor::clean_names()
 evidence.raw <- read.delim(evidencefile,stringsAsFactors = FALSE)
 #evidence.raw<-evidence.raw %>% select(1:5)
 usethis::use_data(evidence.raw, overwrite = TRUE)
+usethis::use_data(allpeptides.raw, overwrite = TRUE)
+
+

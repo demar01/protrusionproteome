@@ -98,13 +98,13 @@ provided with this package:
 
 ```{r load-data-evidence}
 #Evidence data is provided with the package
-data("evidence.raw")
-evidencedata <- evidence.raw
+data("allpeptidesraw")
+allpeptidesdata <- allpeptides.raw
 ```
 
 To visualize TMT label efficiency, we can use `plot_labelingefficiency` function.
 ```{r plot-labelingefficiency}
- plot_labelingefficiency(evidencedata)
+ plot_labelingefficiency(allpeptidesdata)
 ```
 
 ## Loading protein data.
