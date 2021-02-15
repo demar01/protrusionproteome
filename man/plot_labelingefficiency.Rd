@@ -4,7 +4,7 @@
 \alias{plot_labelingefficiency}
 \title{Plot TMT labeling efficiency}
 \usage{
-plot_labelingefficiency(allpeptides)
+plot_labelingefficiency(evidencedata)
 }
 \arguments{
 \item{allpeptides}{Data.frame,
@@ -19,8 +19,8 @@ modified by TMT at the N-termini and Lys residues.
 }
 \examples{
 if(interactive()){
-data("allpeptides.raw")
-allpeptidesdata <- allpeptides.raw
-plot_labelingefficiency(allpeptidesdata)
+data("evidence.raw")
+evidencedata <- evidence.raw
+plot_labelingefficiency(evidencedata)
 }
 }
