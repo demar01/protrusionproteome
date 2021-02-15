@@ -7,7 +7,7 @@
 plot_labelingefficiency(evidencedata)
 }
 \arguments{
-\item{allpeptides}{Data.frame,
+\item{evidencedata}{Data.frame,
 evidence table originating from MaxQuant.}
 }
 \value{

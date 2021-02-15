@@ -3,7 +3,7 @@
 #' \code{plot_labelingefficiency} generates a stacked barplot for peptides
 #' modified by TMT at the N-termini and Lys residues.
 #'
-#' @param allpeptides Data.frame,
+#' @param evidencedata Data.frame,
 #' evidence table originating from MaxQuant.
 #' @examples
 #' if(interactive()){
