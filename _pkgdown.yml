@@ -15,15 +15,11 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
-<<<<<<< HEAD
-=======
     articles:
       text: Articles
       menu:
       - text: Introduction to protrusions proteome analysis
         href: articles/protrusionproteome.html
->>>>>>> parent of 98973b0... characters of genes on enrichR input
-
 reference:
 - title: All functions
   contents:

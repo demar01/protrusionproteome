@@ -20,7 +20,7 @@ plot_labelingefficiency <-  function (evidencedata) {
     evidencedata  %>%
     count(Modifications) %>%
     mutate(Modifications=case_when(
-      Modifications=="Unmodified"~"Unmodified",TRUE~"Modified")) %>%
+      Modifications=="Unmodified"~"Unmodified",TRUE~"TMT Modified")) %>%
     count(Modifications, wt=n ) %>%
     mutate(freq = n / sum(n)) %>%
     dplyr::mutate(g="Peptides") %>%
