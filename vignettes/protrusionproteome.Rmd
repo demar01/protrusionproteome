@@ -204,7 +204,9 @@ We can visualise the Prot/Cell-bodies distribution across timepoints.
 ```{r plot-scatter,  warning=FALSE}
 plot_scatter(se, 1, 2, "HIST", 'orange', 4, 4)
 ```
-As we see Histone proteins are depleted from body. 
+
+
+Histone proteins are depleted from cell body. 
 
 # 1D enrichment analysis 
 
