@@ -37,7 +37,7 @@ protrusionproteome requires tabular input e.g. proteinGroups.txt, peptides.txt a
 
 # Installation and loading package
 
-Start R and install the RBP package:
+Start R and install the protrusionproteome package:
 ```{r install, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
@@ -180,7 +180,7 @@ knitr::kable(tibble(intensities,experiment))
 SummarizedExperiment objects [@Morgan2020] are widely used across Bioconductor packages as data containers. This class of object contains the actual data (assays), information on the samples (colData) and additional feature annotation. We generate the SummarizedExperiment object from our data extracting information directly from the column names of rectangular data using the `make_TMT_se` function. The actual assay data is log2-transformed of median-subtracted Prot/Cell-bodies for each condition.
 
 ``` {r create-TMT-se, warning=FALSE, message=FALSE}
-# Generate a SummarizedExperiment object using using file information and user input
+# Generate a SummarizedExperiment object using file information and user input
 columns_positions<-str_which(colnames(data_unique),"Reporter.intensity.corrected.(\\d)+.(\\d)")
 se <- make_TMT_se(data_unique,columns_positions,intensities,time_unit=30,
 time_span=c(1,2,4,8,16), numerator= "prot", denominator= "body", sep = "_")
@@ -208,7 +208,7 @@ As we see Histone proteins are depleted from body.
 
 # 1D enrichment analysis 
 
-We can perform an protein enrichment analysis for a given timepoint
+We can perform a protein enrichment analysis for a given timepoint
 ```{r enrichment-tibble,  warning=FALSE ,eval = FALSE}
 enrichment_table <- enrich_1D(se,timepoint= 5,
                                dbs = "GO_Molecular_Function_2018",
